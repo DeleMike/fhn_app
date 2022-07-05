@@ -24,6 +24,7 @@ const Color kPrimaryTextColor = Color(0xFF212121);
 const Color kSecondaryTextColor = Color(0xFF757575);
 const Color kDividerColor = Color(0xFFBDBDBD);
 const Color kRed = Color(0xFF960000);
+const Color kGreen = Color(0xFF4A9E24);
 const Color kTransparent = Colors.transparent;
 
 // Padding
@@ -70,5 +71,4 @@ class AssetsImages {
   static const String product14 = 'assets/images/product-14.png';
   static const String product15 = 'assets/images/product-15.png';
   static const String product16 = 'assets/images/product-16.png';
-
 }

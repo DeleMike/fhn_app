@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../data/product_data.dart';
 import '../configs/constants.dart';
 import '../configs/routes.dart';
+import '../configs/app_extensions.dart';
 
 import '/core/providers/checkout_controller.dart';
 
@@ -103,7 +104,7 @@ class _GridContainerState extends State<_GridContainer> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(
-                        'NGN ' '${products[index].price.toString()}',
+                        'NGN ' '${products[index].price.formatToCurrencyForm().toString()}',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyText2,
                       ),

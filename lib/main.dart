@@ -1,9 +1,9 @@
-import 'package:fhn_shop/configs/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'configs/app_theme.dart';
 import 'configs/routes.dart';
+import 'configs/constants.dart';
 
 import 'core/providers/checkout_controller.dart';
 

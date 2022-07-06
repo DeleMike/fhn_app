@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../configs/constants.dart';
 import '../configs/app_extensions.dart';
@@ -55,7 +56,17 @@ class Checkout extends StatelessWidget {
                   ? () {
                       Navigator.of(context).pop();
                     }
-                  : () {},
+                  : () {
+                      Fluttertoast.showToast(
+                        msg: 'Successful payment',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: kGrey,
+                        textColor: kBlack,
+                        fontSize: 16.0,
+                      );
+                    },
               child: Padding(
                 padding: const EdgeInsets.all(kPaddingM),
                 child: Text(
@@ -117,7 +128,7 @@ class _ListItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: kPaddingS),
                     child: Text(
-                      'NGN ' '${product.price}',
+                      'NGN ' '${product.price.formatToCurrencyForm()}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,

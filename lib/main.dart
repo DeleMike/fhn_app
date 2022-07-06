@@ -1,10 +1,10 @@
+import 'package:fhn_shop/configs/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'configs/app_theme.dart';
 import 'configs/routes.dart';
 
-import 'core/providers/all_products_controller.dart';
 import 'core/providers/checkout_controller.dart';
 
 void main() {
@@ -18,15 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (ctx) => AllProductsController(),
-        ),
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<CheckOutController>(
           create: (ctx) => CheckOutController(),
         ),
       ],
       child: MaterialApp(
-        title: 'Trivia',
+        title: kAppName,
         theme: AppTheme(context).lightTheme,
         initialRoute: '/',
         routes: Routes().generateRoutes(context),

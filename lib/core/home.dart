@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:provider/provider.dart';
 
-import '../data/product_data.dart';
-import '../configs/constants.dart';
-import '../configs/routes.dart';
+import '/data/product_data.dart';
+import '/configs/constants.dart';
+import '/configs/routes.dart';
 
-import '../core/providers/all_products_controller.dart';
+import '/core/providers/checkout_controller.dart';
 
 /// Display all products
 class HomeScreen extends StatelessWidget {
@@ -29,9 +29,11 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: kPaddingM),
             child: IconButton(
-              onPressed: () => Navigator.of(context).pushNamed(Routes.checkout),
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.checkout);
+              },
               icon: Badge(
-                badgeContent: Text(context.watch<AllProductsController>().producInCart.toString(),
+                badgeContent: Text(context.watch<CheckOutController>().cartContents.length.toString(),
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(color: kWhite)),
                 child: const Icon(Icons.shopping_cart_checkout_outlined),
               ),
@@ -109,19 +111,29 @@ class _GridContainerState extends State<_GridContainer> {
                   Flexible(
                       child: ElevatedButton.icon(
                     onPressed: () {
-                      context.read<AllProductsController>().addToCart(products[index]);
+                      context.read<CheckOutController>().addToCart(products[index]);
 
                       debugPrint('Product ID: ${products[index].productId}');
                       debugPrint('Product Name: ${products[index].name}');
                       debugPrint('Product Price: ${products[index].price}');
                       debugPrint('Product Desc: ${products[index].description}');
 
-                      if (context.read<AllProductsController>().isProductAdded) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(content: Text('Already in cart')));
+                      if (context.read<CheckOutController>().isProductAdded) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Already in Cart'),
+                            action: SnackBarAction(
+                              onPressed: () {},
+                              label: 'OKAY',
+                              textColor: kWhite,
+                            )));
                       } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(content: Text('Added to cart')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Added to cart'),
+                            action: SnackBarAction(
+                              onPressed: () {},
+                              label: 'OKAY',
+                              textColor: kWhite,
+                            )));
                       }
                     },
                     icon: const Icon(Icons.add_shopping_cart_outlined),

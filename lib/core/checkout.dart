@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../configs/constants.dart';
+import '/configs/constants.dart';
+
+import '/models/product.dart';
+import 'providers/checkout_controller.dart';
 
 /// Check out page to pay
 class Checkout extends StatelessWidget {
@@ -8,6 +12,7 @@ class Checkout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final products = context.watch<CheckOutController>().cartContents;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kCanvasColor,
@@ -24,12 +29,14 @@ class Checkout extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) {
-                return _ListItem(index: index);
+                return _ListItem(
+                  product: products[index],
+                );
               },
               separatorBuilder: (_, __) {
                 return const Divider(color: kPrimaryColor);
               },
-              itemCount: 10,
+              itemCount: products.length,
             ),
           ),
           Container(
@@ -59,8 +66,8 @@ class Checkout extends StatelessWidget {
 
 // Represents a custom list tile
 class _ListItem extends StatelessWidget {
-  final int index;
-  const _ListItem({Key? key, required this.index}) : super(key: key);
+  final Product product;
+  const _ListItem({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +85,7 @@ class _ListItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Image.asset(
-                AssetsImages.product10,
+                product.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
@@ -92,17 +99,17 @@ class _ListItem extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Product ${index + 1}',
+                    product.name,
                     style: const TextStyle(
                       fontSize: 20,
                       color: kBlack,
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: kPaddingS),
+                  Padding(
+                    padding: const EdgeInsets.only(top: kPaddingS),
                     child: Text(
-                      'NGN 100',
-                      style: TextStyle(
+                      'NGN ' '${product.price}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                         color: Color.fromARGB(226, 54, 54, 54),
@@ -123,7 +130,9 @@ class _ListItem extends StatelessWidget {
                     width: 70,
                     child: const QuantityDropdownButton()),
                 TextButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<CheckOutController>().removeProduct(product.productId);
+                  },
                   icon: const Icon(Icons.delete),
                   label: const Text(
                     'Remove',

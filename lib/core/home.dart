@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../data/product_data.dart';
 import '../configs/constants.dart';
+import '../configs/routes.dart';
 
 import '../core/providers/all_products_controller.dart';
 
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: kPaddingM),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pushNamed(Routes.checkout),
               icon: Badge(
                 badgeContent: Text(context.watch<AllProductsController>().producInCart.toString(),
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(color: kWhite)),

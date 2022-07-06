@@ -5,6 +5,7 @@ import 'configs/app_theme.dart';
 import 'configs/routes.dart';
 
 import 'core/providers/all_products_controller.dart';
+import 'core/providers/checkout_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => AllProductsController(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => CheckOutController(),
         ),
       ],
       child: MaterialApp(

@@ -9,6 +9,7 @@ import '../core/providers/all_products_controller.dart';
 
 /// Display all products
 class HomeScreen extends StatelessWidget {
+  /// Display all products
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

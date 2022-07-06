@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:provider/provider.dart';
 
-import '/data/product_data.dart';
-import '/configs/constants.dart';
-import '/configs/routes.dart';
+import '../data/product_data.dart';
+import '../configs/constants.dart';
+import '../configs/routes.dart';
 
 import '/core/providers/checkout_controller.dart';
 
@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: kPaddingM),
             child: IconButton(
               onPressed: () {
+                context.read<CheckOutController>().getPrice();
                 Navigator.pushNamed(context, Routes.checkout);
               },
               icon: Badge(
@@ -117,6 +118,7 @@ class _GridContainerState extends State<_GridContainer> {
                       debugPrint('Product Name: ${products[index].name}');
                       debugPrint('Product Price: ${products[index].price}');
                       debugPrint('Product Desc: ${products[index].description}');
+                      debugPrint('Product Quantity: ${products[index].quantity}');
 
                       if (context.read<CheckOutController>().isProductAdded) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/configs/constants.dart';
+import '../configs/constants.dart';
+import '../configs/app_extensions.dart';
 
 import '/models/product.dart';
 import 'providers/checkout_controller.dart';
@@ -27,17 +28,19 @@ class Checkout extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return _ListItem(
-                  product: products[index],
-                );
-              },
-              separatorBuilder: (_, __) {
-                return const Divider(color: kPrimaryColor);
-              },
-              itemCount: products.length,
-            ),
+            child: context.watch<CheckOutController>().cartContents.isEmpty
+                ? const Center(child: Text('There is nothing in the cart...Let\'s go shopping'))
+                : ListView.separated(
+                    itemBuilder: (context, index) {
+                      return _ListItem(
+                        product: products[index],
+                      );
+                    },
+                    separatorBuilder: (_, __) {
+                      return const Divider(color: kPrimaryColor);
+                    },
+                    itemCount: products.length,
+                  ),
           ),
           Container(
             width: kScreenWidth(context),
@@ -48,11 +51,17 @@ class Checkout extends StatelessWidget {
               bottom: kPaddingM,
             ),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: context.read<CheckOutController>().cartContents.isEmpty
+                  ? () {
+                      Navigator.of(context).pop();
+                    }
+                  : () {},
               child: Padding(
                 padding: const EdgeInsets.all(kPaddingM),
                 child: Text(
-                  'PAY NGN PAY.00',
+                  context.watch<CheckOutController>().cartContents.isEmpty
+                      ? 'CONTINUE SHOPPING'
+                      : 'PAY NGN ${context.watch<CheckOutController>().totalPrice.formatToCurrencyForm()}',
                   style: Theme.of(context).textTheme.headline5!.copyWith(color: kWhite),
                 ),
               ),
@@ -128,7 +137,9 @@ class _ListItem extends StatelessWidget {
                     //padding: const EdgeInsets.all(kPaddingS),
                     decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(6)),
                     width: 70,
-                    child: const QuantityDropdownButton()),
+                    child: QuantityDropdownButton(
+                      product: product,
+                    )),
                 TextButton.icon(
                   onPressed: () {
                     context.read<CheckOutController>().removeProduct(product.productId);
@@ -155,10 +166,12 @@ class _ListItem extends StatelessWidget {
 ///
 /// If user selects '1' then they want to buy one item.
 class QuantityDropdownButton extends StatefulWidget {
+  final Product product;
+
   /// Creates a drop down list option to select the product quantity to buy.
   ///
   /// If user selects '1' then they want to buy one item.
-  const QuantityDropdownButton({Key? key}) : super(key: key);
+  const QuantityDropdownButton({Key? key, required this.product}) : super(key: key);
 
   @override
   State<QuantityDropdownButton> createState() => _QuantityDropdownButtonState();
@@ -172,7 +185,7 @@ class _QuantityDropdownButtonState extends State<QuantityDropdownButton> {
         width: 70,
         child: Center(
           child: DropdownButton<String>(
-            value: '1',
+            value: widget.product.quantity.toString(),
             icon: const Icon(Icons.expand_more),
             elevation: 16,
             style: const TextStyle(color: Colors.deepPurple),
@@ -181,6 +194,10 @@ class _QuantityDropdownButtonState extends State<QuantityDropdownButton> {
               setState(() {
                 dropdownValue = newValue!;
               });
+
+              context
+                  .read<CheckOutController>()
+                  .updateProductQuantity(widget.product.productId, int.parse(dropdownValue));
             },
             items: <String>['1', '2', '3', '4', '5'].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(value: value, child: Text(value));

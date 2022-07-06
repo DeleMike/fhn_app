@@ -16,6 +16,9 @@ class Product {
   /// product's price
   final double price;
 
+  /// product's quantity
+  int quantity = 1;
+
   /// Model for a single Product
   ///
   Product({
@@ -23,6 +26,6 @@ class Product {
     required this.name,
     required this.description,
     required this.imageUrl,
-    required this.price
+    required this.price,
   });
 }

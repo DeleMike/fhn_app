@@ -8,7 +8,7 @@ final products = [
     description: 'A sweater',
     imageUrl: AssetsImages.product1,
     price: 5000,
-    isAdded: false,
+
   ),
   Product(
     productId: 2,
@@ -16,7 +16,7 @@ final products = [
     description: 'A gown',
     imageUrl: AssetsImages.product2,
     price: 5000,
-    isAdded: false,
+
   ),
   Product(
     productId: 3,
@@ -24,7 +24,7 @@ final products = [
     description: 'A smart watch',
     imageUrl: AssetsImages.product3,
     price: 10000,
-    isAdded: false,
+
   ),
   Product(
     productId: 4,
@@ -32,7 +32,7 @@ final products = [
     description: 'A glasses',
     imageUrl: AssetsImages.product4,
     price: 2500,
-    isAdded: false,
+
   ),
   Product(
     productId: 5,
@@ -40,7 +40,7 @@ final products = [
     description: 'A shirt',
     imageUrl: AssetsImages.product5,
     price: 5000,
-    isAdded: false,
+
   ),
   Product(
     productId: 6,
@@ -48,7 +48,7 @@ final products = [
     description: 'A headset',
     imageUrl: AssetsImages.product6,
     price: 8000,
-    isAdded: false,
+
   ),
   Product(
     productId: 7,
@@ -56,7 +56,7 @@ final products = [
     description: 'A bag',
     imageUrl: AssetsImages.product7,
     price: 3500,
-    isAdded: false,
+
   ),
   Product(
     productId: 8,
@@ -64,7 +64,7 @@ final products = [
     description: 'A football boot',
     imageUrl: AssetsImages.product8,
     price: 4000,
-    isAdded: false,
+
   ),
   Product(
     productId: 9,
@@ -72,7 +72,7 @@ final products = [
     description: 'A high heel shoe',
     imageUrl: AssetsImages.product9,
     price: 7000,
-    isAdded: false,
+
   ),
   Product(
     productId: 10,
@@ -80,7 +80,7 @@ final products = [
     description: 'A mouse',
     imageUrl: AssetsImages.product10,
     price: 2900,
-    isAdded: false,
+
   ),
   Product(
     productId: 11,
@@ -88,7 +88,7 @@ final products = [
     description: 'An Ear pod',
     imageUrl: AssetsImages.product11,
     price: 6000,
-    isAdded: false,
+
   ),
   Product(
     productId: 12,
@@ -96,7 +96,7 @@ final products = [
     description: 'A smart watch',
     imageUrl: AssetsImages.product12,
     price: 12000,
-    isAdded: false,
+
   ),
   Product(
     productId: 13,
@@ -104,7 +104,7 @@ final products = [
     description: 'A laptop',
     imageUrl: AssetsImages.product13,
     price: 400000,
-    isAdded: false,
+
   ),
   Product(
     productId: 14,
@@ -112,7 +112,7 @@ final products = [
     description: 'A smart watch',
     imageUrl: AssetsImages.product14,
     price: 5000,
-    isAdded: false,
+
   ),
   Product(
     productId: 15,
@@ -120,7 +120,7 @@ final products = [
     description: 'An XBox Pad',
     imageUrl: AssetsImages.product15,
     price: 15000,
-    isAdded: false,
+
   ),
   Product(
     productId: 16,
@@ -128,6 +128,6 @@ final products = [
     description: 'A phone',
     imageUrl: AssetsImages.product16,
     price: 95000,
-    isAdded: false,
+
   ),
 ];

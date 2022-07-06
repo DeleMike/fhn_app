@@ -16,9 +16,6 @@ class Product {
   /// product's price
   final double price;
 
-  /// product's cart state
-  final bool isAdded;
-
   /// Model for a single Product
   ///
   Product({
@@ -26,7 +23,6 @@ class Product {
     required this.name,
     required this.description,
     required this.imageUrl,
-    required this.price,
-    required this.isAdded,
+    required this.price
   });
 }
